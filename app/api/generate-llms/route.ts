@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import * as cheerio from 'cheerio';
-
+  export const runtime = 'edge';
 export async function POST(req: NextRequest) {
   try {
     const { domain } = await req.json();

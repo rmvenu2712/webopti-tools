@@ -1,5 +1,7 @@
 import { type NextRequest, NextResponse } from "next/server"
 
+export const runtime = 'edge';
+
 interface AnalysisResult {
   url: string
   scores: {
@@ -38,6 +40,7 @@ function generateRealisticData(seed: string): AnalysisResult {
   const variance = (val: number) => Math.max(0, Math.min(100, val + (rng() - 0.5) * 20))
 
   return {
+    url: seed, // ✅ Added url property here
     scores: {
       performance: Math.round(basePerf),
       accessibility: Math.round(variance(85)),
@@ -103,10 +106,8 @@ export async function POST(request: NextRequest) {
     // Generate consistent realistic data based on URL
     const result = generateRealisticData(url)
 
-    return NextResponse.json({
-      ...result,
-      url,
-    })
+    // ✅ Simplified - no need to spread and add url again
+    return NextResponse.json(result)
   } catch (error) {
     console.error("[v0] API error:", error)
     return NextResponse.json({ error: "Failed to analyze URL" }, { status: 500 })

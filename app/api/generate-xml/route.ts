@@ -2,7 +2,7 @@
 import { NextRequest } from "next/server";
 import axios from "axios";
 import * as cheerio from "cheerio";
-
+  export const runtime = 'edge';
 /**
  * Keep the original host (www or non-www) that the user typed.
  */

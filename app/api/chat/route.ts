@@ -1,5 +1,5 @@
 import type { NextRequest } from "next/server"
-
+  export const runtime = 'edge';
 export const POST = async (req: NextRequest) => {
   const { messages } = await req.json()
   const apiKey = process.env.OPENROUTER_API_KEY
